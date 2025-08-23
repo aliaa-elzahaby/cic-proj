@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>My AWS Web Server</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f2f2f2;
+      padding: 50px;
+    }
+    img {
+      width: 150px;
+    }
+    .metadata {
+      margin-top: 20px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      display: inline-block;
+      text-align: left;
+    }
+    h2 {
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <img src="https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png" alt="AWS Logo" />
+  <h1>Welcome to Your AWS Web Server</h1>
+  
+  <div class="metadata">
+    <h2>Instance Metadata</h2>
+    <p><strong>Instance ID:</strong> <span id="instance-id">Loading...</span></p>
+    <p><strong>Availability Zone:</strong> <span id="az">Loading...</span></p>
+    <p><strong>Public IP:</strong> <span id="public-ip">Loading...</span></p>
+  </div>
+
+  <script>
+    async function fetchMetadata(path) {
+      try {
+        const tokenResponse = await fetch("http://169.254.169.254/latest/api/token", {
+          method: "PUT",
+          headers: {
+            "X-aws-ec2-metadata-token-ttl-seconds": "21600"
+          }
+        });
+        const token = await tokenResponse.text();
+        const response = await fetch(`http://169.254.169.254/latest/meta-data/${path}`, {
+          headers: {
+            "X-aws-ec2-metadata-token": token
+          }
+        });
+        return response.text();
+      } catch (err) {
+        return "Unavailable";
+      }
+    }
+
+    async function loadMetadata() {
+      document.getElementById("instance-id").innerText = await fetchMetadata("instance-id");
+      document.getElementById("az").innerText = await fetchMetadata("placement/availability-zone");
+      document.getElementById("public-ip").innerText = await fetchMetadata("public-ipv4");
+    }
+
+    loadMetadata();
+  </script>
+</body>
+</html>
