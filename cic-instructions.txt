@@ -244,9 +244,13 @@ kubectl get svc
 
 minikube service web-server-service
 
+  
+>>>>>>>>>>>>>>
+
+cloudflared tunnel --url http://localhost:8080    to give you public URL   to connect your laptop eith GitHub 
 
 
-
+>>>>>>>>>>
 
 minikube image load aliaaahmed432/k8s-web-server-cic:latest
 
