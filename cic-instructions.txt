@@ -53,15 +53,17 @@ const  app = express()
 const PORT =3000
 
 app.get("/", (req,res)=>{
-       const message='hello world,i am pod${os.hostname()}'
-       res.send(message)
+       const message='hello world,i am Aliaa Ahmed .  we are working with CIC students :)  ...'
+       res.send('message')
 
 })
 
 app.listen(PORT,()=>{
-        console.log('web server is listening at port ${PORT}'
+        console.log(`web server is listening at port ${PORT}`);
         console.log(os.hostname())
 })
+
+
 
 
             >>>>>>>>>>>>>>>>
@@ -254,6 +256,44 @@ kubectl get events --sort-by=.metadata.creationTimestamp
 kubectl get svc web-server-service
 
 minikube service web-server-service
+
+..........................................................
+
+helm install releasename   chart-name
+
+values.yml
+
+
+helm install releasename  -f   values.yml 
+
+
+helm upgrade  releasename   chart-name
+
+helm uninstall releasename   chart-name
+
+helm   rollback   releasename   chart-name
+
+
+
+      >>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+
+./jenkins_deploy_helm.sh
+
+helm repo add jenkins https://charts.jenkins.io
+
+
+
+
+
+
+
+
+
+
+
 
 
 
