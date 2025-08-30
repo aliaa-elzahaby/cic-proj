@@ -6,8 +6,8 @@ const  app = express()
 const PORT =3000
 
 app.get("/", (req,res)=>{
-       const message='hello world,i am Aliaa Ahmed .... ${os.hostname()}'
-       res.send(message)
+       const message='hello world,i am Aliaa Ahmed .  we are working with CIC students :)  ...'
+       res.send('Hello from my Node.js app!.. with Aliaa   ')
 
 })
 
